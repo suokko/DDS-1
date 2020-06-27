@@ -8,14 +8,22 @@ Uses Bo Hagland's solver https://github.com/dds-bridge/dds -- requires the libdd
 Credit to Alexis Rimbaud of NukkAI for the python dds wrapper.
 
 
-# Build and install libdds.so under MacOS #
+# Build and install libdds library for local testing
 
 ```
-git clone https://github.com/dds-bridge/dds.git
-cd dds/src
-make -f Makefiles/Makefile_Mac_clang_shared THREADING=
-ln libdds.so /usr/local/lib
+# Initialize submodules and fetch the submodule repository
+git submodule update --init
+# Make a build directory for libdds
+mkdir libdds/.build
+cd libdds/.build
+# Configure the library to include debug symbols in optimized builds
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+# Compile the library
+make
+# Install Runtime component to CMAKE_INSTALL_PREFIX (default /usr/local)
+cmake -DCMAKE_INSTALL_COMPONENT=Runtime -P cmake_install.cmake
 ```
+
 
 # Install a local server using Flask, then test it manually:
 
