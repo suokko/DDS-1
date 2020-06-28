@@ -69,6 +69,12 @@ Deploy it on the server:
 $ make deploy
 ```
 
+## Updating libdds Submodule
+
+Submodule updates can be simple done by checking out any commit hash which means
+branches, tags and plane commit hash numbers. Next step is to use
+`git add libdds` to make the commit change part of your commit.
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
