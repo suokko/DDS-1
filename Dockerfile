@@ -1,20 +1,16 @@
-FROM debian:buster as dds-builder
+FROM debian:buster-slim as dds-builder
 
 RUN apt-get update
 # Install only minimum required packages
 RUN apt-get install -y --no-install-recommends \
-  ca-certificates \
   cmake \
-  git \
   g++ \
   ninja-build
 
 # Make sure sources are the latest for the build operation
-ARG CACHEBUST=1
 ADD libdds /app
 
-RUN rm -rf /app/.build && \
-  mkdir -p /app/.build
+RUN mkdir -p /app/.build
 
 WORKDIR /app/.build
 
@@ -33,17 +29,15 @@ RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 
 FROM python:3.7-buster
 
-# Copy installed runtime files to real image
-COPY --from=dds-builder /app/.build/install/usr/lib /usr/lib
-
 RUN mkdir -p /app
 WORKDIR /app
 
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
+# Copy installed runtime files to real image
+COPY --from=dds-builder /app/.build/install/usr/lib /usr/lib
+
 COPY /src/ /app/
 
 ENV FLASK_APP "api.py"
-
-

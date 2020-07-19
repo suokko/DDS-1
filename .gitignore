@@ -6,3 +6,11 @@ src/dump.txt
 .idea/
 venv/
 server.yaml
+*build*/
+/libdds/hands/
+/libdds/doc/*.pdf
+/libdds/doc/*.docx
+/libdds/doc/*.rtf
+/libdds/doc/*.htm*
+/libdds/doc/*.mht
+.dockerignore

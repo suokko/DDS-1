@@ -2,3 +2,7 @@
 	path = libdds
 	url = ../../online-bridge-hackathon/libdds
 	branch = master
+[submodule "bridge-hackathon"]
+	path = bridge-hackathon
+	url = ../../online-bridge-hackathon/bridge-hackathon.git
+	branch = master
